@@ -1,0 +1,65 @@
+<?php include_once('header.php'); ?>
+<?php include_once('includes/sqlFunctions.php');?>
+<div id="main">
+    <div id="slide-bar">
+        <div class="image">
+            <h1>Students</h1>
+</div>
+</div>
+<div class="tabela">
+    <h1 style = "margin-bottom:50px;">Students</h1>
+    <div style = "clear:both;"></div>
+    <table id="students_table">
+        <thread>
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Course</th>
+                <th>Modify</th>
+                <th>Delete</th>
+</tr>
+</thread>
+<body>
+    <?php $students = merrStudentet();
+    while ($students = 'mysql_fetch_assoc'($students)){?>
+<tr>
+    <td><?php echo $students['username'];?></td>
+    <td><?php echo $students['name'];?></td>
+    <td><?php echo $students['surname'];?></td>
+    <td><?php echo $students['email'];?></td>
+    <td><?php echo $students['password'];?></td>
+    <td><?php echo $students['course'];?></td>
+    <td id = "modify">
+        <a href="shto_modifiko_studentet.php?studentid=<?php echo $studentid['studentid']; ?>"></a>
+    </td>
+    <td id="fshij">
+        <form action="fshijStudentin.php" method="post">
+            <input type="text" name="studentid" hidden value="<?php echo $students['$studentid']; ?>">
+            <button type="submit" style="border:none;background-color:transparent;cursor:pointer;" name="deleteStudent" onclick="return fshijStudentin()">
+            </button>
+        </form>
+      <script>
+      function fshijStudentin(){
+      $confirm = confirm("Are you sure you want to delete the student?");  <!--kontrolloje qet confirm apet-->
+        if($confirm){
+          return true;
+        }else{
+          return false;
+        }
+      }
+      </script>
+    </td>
+  </tr>
+<?php } ?>
+</tbody>
+</table>
+<button onclick="window.location.href='shto_modifiko_studentet.php'" id="shto_studentet">Add Student</button>     <!--krijoje qet file-->
+<div style = "clear:both;"></div>
+</div>
+</div>
+<hr>
+<?php include_once('footer.php');?>
+    }
